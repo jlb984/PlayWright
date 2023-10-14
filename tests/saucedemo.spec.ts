@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from './pageObjects/LoginPage';
 
 //clase que utiliza la pagina de prueba saucedemo.com que simula una app de compras online
 
@@ -10,9 +11,10 @@ test.beforeEach(async ({ page }) => {
 test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  const loginPage = new LoginPage(page);
+  await loginPage.completarUserName("standard_user");
+  await loginPage.completarPassword("secret_sauce");
+  await loginPage.clickLogin();
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -23,9 +25,10 @@ test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ pa
 test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => {
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  const loginPage = new LoginPage(page);
+  await loginPage.completarUserName("standard_user");
+  await loginPage.completarPassword("secret_sauce");
+  await loginPage.clickLogin();
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -54,9 +57,11 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
 test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  const loginPage = new LoginPage(page);
+  await loginPage.completarUserName("standard_user");
+  await loginPage.completarPassword("secret_sauce");
+  await loginPage.clickLogin();
+
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -93,9 +98,11 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ page }) => {
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  const loginPage = new LoginPage(page);
+  await loginPage.completarUserName("standard_user");
+  await loginPage.completarPassword("secret_sauce");
+  await loginPage.clickLogin();
+
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -144,9 +151,11 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
 test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  const loginPage = new LoginPage(page);
+  await loginPage.completarUserName("standard_user");
+  await loginPage.completarPassword("secret_sauce");
+  await loginPage.clickLogin();
+
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -230,10 +239,6 @@ await page.getByRole('button', {name: "Open Menu"}).click();
 await page.getByRole('link', {name: "Logout"}).click();
 
 expect(page.getByRole('button', {name: "Login"})).toBeEnabled;
-
-
-
-
 
 });
 
