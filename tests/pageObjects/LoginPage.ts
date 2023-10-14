@@ -24,4 +24,9 @@ export class LoginPage{         //creacion de clase
         await this.loginButton.click();
     } 
 
+    async realizarLogin(user: string, password: string){
+       await this.completarUserName(user);
+       await this.completarPassword(password);
+       await this.clickLogin();
+    }
 }

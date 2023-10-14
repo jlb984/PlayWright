@@ -11,10 +11,7 @@ test.beforeEach(async ({ page }) => {
 test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  const loginPage = new LoginPage(page);
-  await loginPage.completarUserName("standard_user");
-  await loginPage.completarPassword("secret_sauce");
-  await loginPage.clickLogin();
+  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -25,10 +22,7 @@ test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ pa
 test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => {
 
   //login
-  const loginPage = new LoginPage(page);
-  await loginPage.completarUserName("standard_user");
-  await loginPage.completarPassword("secret_sauce");
-  await loginPage.clickLogin();
+  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -57,10 +51,7 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
 test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 
   //login
-  const loginPage = new LoginPage(page);
-  await loginPage.completarUserName("standard_user");
-  await loginPage.completarPassword("secret_sauce");
-  await loginPage.clickLogin();
+  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
 
 
   // Expect a title "to contain" a substring.
@@ -98,10 +89,7 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ page }) => {
 
   //login
-  const loginPage = new LoginPage(page);
-  await loginPage.completarUserName("standard_user");
-  await loginPage.completarPassword("secret_sauce");
-  await loginPage.clickLogin();
+  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
 
 
   // Expect a title "to contain" a substring.
@@ -151,10 +139,7 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
 test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  const loginPage = new LoginPage(page);
-  await loginPage.completarUserName("standard_user");
-  await loginPage.completarPassword("secret_sauce");
-  await loginPage.clickLogin();
+  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
 
 
   // Expect a title "to contain" a substring.
