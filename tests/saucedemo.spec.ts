@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPageSteps } from './pageObjects/steps/LoginPageSteps';
 import { InventoryPageSteps } from './pageObjects/steps/InventoryPageSteps';
+import { NumberHelper } from './helpers/NumberHelpers';
 
 //clase que utiliza la pagina de prueba saucedemo.com que simula una app de compras online
 
@@ -32,9 +33,7 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
   const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   for(let item of itemsContainer){
     console.log(await item.innerText()) 
@@ -63,9 +62,7 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
   const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   const nombreEsperado = await randomItem.locator('.inventory_item_name').innerText();
   const descripcionEsperada = await randomItem.locator('.inventory_item_desc').innerText();
@@ -102,9 +99,7 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
   const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   const nombreEsperado = await randomItem.locator('.inventory_item_name').innerText();
   const descripcionEsperada = await randomItem.locator('.inventory_item_desc').innerText();
@@ -153,9 +148,7 @@ test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
   const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   const nombreEsperado = await randomItem.locator('.inventory_item_name').innerText();
   const descripcionEsperada = await randomItem.locator('.inventory_item_desc').innerText();
