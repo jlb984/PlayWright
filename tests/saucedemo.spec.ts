@@ -29,7 +29,7 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
   const randomIndex = Math.floor(Math.random() * itemsContainer.length);
@@ -50,6 +50,7 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
 
 //Como 'usuario estandar' logueado Quiero buscar un producto aleatoriamente y hacerle click Para comprobar que los datos del 'Home' sean iguales dentro del box
 test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
 
   //login
   await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
@@ -59,7 +60,7 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
   const randomIndex = Math.floor(Math.random() * itemsContainer.length);
@@ -88,6 +89,7 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 
 //Como 'usuario estandar' logueado Quiero agregar un producto al carrito Para comprobar que se sume al carrito
 test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ page }) => {
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
 
   //login
   await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
@@ -97,7 +99,7 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
   const randomIndex = Math.floor(Math.random() * itemsContainer.length);
@@ -138,7 +140,8 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
 
 //Como 'usuario estandar' logueado Quiero realizar un proceso de compra completo Para confirmar que se completa la compra
 test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
-
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
+  
   //login
   await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
@@ -147,7 +150,7 @@ test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
   const randomIndex = Math.floor(Math.random() * itemsContainer.length);
