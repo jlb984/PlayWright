@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from './pageObjects/LoginPage';
+import { LoginPageSteps } from './pageObjects/steps/LoginPageSteps';
+import { InventoryPageSteps } from './pageObjects/steps/InventoryPageSteps';
 
 //clase que utiliza la pagina de prueba saucedemo.com que simula una app de compras online
 
@@ -11,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -20,9 +21,9 @@ test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ pa
 
 //Como 'usuario estandar' logueado Quiero buscar un producto aleatoriamente Para obtener los datos del mismo
 test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => {
-
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
   //login
-  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -51,7 +52,7 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
 test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 
   //login
-  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
 
   // Expect a title "to contain" a substring.
@@ -89,7 +90,7 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ page }) => {
 
   //login
-  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
 
   // Expect a title "to contain" a substring.
@@ -139,7 +140,7 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
 test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  await new LoginPage(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
 
   // Expect a title "to contain" a substring.
