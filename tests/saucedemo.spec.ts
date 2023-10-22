@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { LoginPageSteps } from './pageObjects/steps/LoginPageSteps';
+import { InventoryPageSteps } from './pageObjects/steps/InventoryPageSteps';
+import { NumberHelper } from './helpers/NumberHelpers';
 
 //clase que utiliza la pagina de prueba saucedemo.com que simula una app de compras online
 
@@ -10,9 +13,7 @@ test.beforeEach(async ({ page }) => {
 test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -21,22 +22,18 @@ test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ pa
 
 //Como 'usuario estandar' logueado Quiero buscar un producto aleatoriamente Para obtener los datos del mismo
 test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => {
-
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   for(let item of itemsContainer){
     console.log(await item.innerText()) 
@@ -52,22 +49,20 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
 
 //Como 'usuario estandar' logueado Quiero buscar un producto aleatoriamente y hacerle click Para comprobar que los datos del 'Home' sean iguales dentro del box
 test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   const nombreEsperado = await randomItem.locator('.inventory_item_name').innerText();
   const descripcionEsperada = await randomItem.locator('.inventory_item_desc').innerText();
@@ -91,22 +86,20 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
 
 //Como 'usuario estandar' logueado Quiero agregar un producto al carrito Para comprobar que se sume al carrito
 test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ page }) => {
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
 
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   const nombreEsperado = await randomItem.locator('.inventory_item_name').innerText();
   const descripcionEsperada = await randomItem.locator('.inventory_item_desc').innerText();
@@ -142,22 +135,20 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
 
 //Como 'usuario estandar' logueado Quiero realizar un proceso de compra completo Para confirmar que se completa la compra
 test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
-
+  const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
+  
   //login
-  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user')
-  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce')
-  await page.getByRole('button', {name: 'Login'}).click()
+  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
 
   //obtener todos los boxes de productos en una lista
-  const itemsContainer = await page.locator('#inventory_container .inventory_item').all()
+  const itemsContainer = await inventoryPageSteps.obtenerBoxesProductos();
 
   //obtener un elemento de forma aleatoria
-  const randomIndex = Math.floor(Math.random() * itemsContainer.length);
-
-  const randomItem = itemsContainer[randomIndex];
+  const randomItem = itemsContainer[NumberHelper.obtenerNumeroAleatorio(itemsContainer.length)];
 
   const nombreEsperado = await randomItem.locator('.inventory_item_name').innerText();
   const descripcionEsperada = await randomItem.locator('.inventory_item_desc').innerText();
@@ -230,10 +221,6 @@ await page.getByRole('button', {name: "Open Menu"}).click();
 await page.getByRole('link', {name: "Logout"}).click();
 
 expect(page.getByRole('button', {name: "Login"})).toBeEnabled;
-
-
-
-
 
 });
 
