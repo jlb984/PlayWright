@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {    
+  "scripts": {
     "prueba": "npx playwright test ejemplos_basicos.spec.ts",
     "saucedemo": "npx playwright test saucedemo.spec.ts",
     "login": "npx playwright test --grep 'login'"
@@ -14,5 +14,8 @@
   "devDependencies": {
     "@playwright/test": "^1.39.0",
     "@types/node": "^20.8.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
   }
 }

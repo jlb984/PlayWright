@@ -2,18 +2,20 @@ import { test, expect } from '@playwright/test';
 import { LoginPageSteps } from './pageObjects/steps/LoginPageSteps';
 import { InventoryPageSteps } from './pageObjects/steps/InventoryPageSteps';
 import { NumberHelper } from './helpers/NumberHelpers';
+import dotenv from 'dotenv'
+dotenv.config()
 
 //clase que utiliza la pagina de prueba saucedemo.com que simula una app de compras online
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.saucedemo.com/');
+  await page.goto(process.env.SAUCEDEMO_BASE_URL);
 });
 
 //Como 'usuario estandar' Quiero realizar el login Para visualizar el 'Home'
 test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ page }) => {
 
   //login
-  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin(process.env.SAUCEDEMO_USR_STANDAR, process.env.SAUCEDEMO_PASSWORD);
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -24,7 +26,7 @@ test('realizar login usuario estandar @login @happyPath @sauceDemo', async ({ pa
 test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => {
   const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
   //login
-  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin(process.env.SAUCEDEMO_USR_STANDAR, process.env.SAUCEDEMO_PASSWORD);
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Swag Labs/);
@@ -52,7 +54,7 @@ test('comprobar box Producto @productBox @sauceDemo', async ({ page }) => {
   const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
 
   //login
-  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin(process.env.SAUCEDEMO_USR_STANDAR, process.env.SAUCEDEMO_PASSWORD);
 
 
   // Expect a title "to contain" a substring.
@@ -89,7 +91,7 @@ test('comprobar agregar producto a Carrito @productBox @sauceDemo', async ({ pag
   const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
 
   //login
-  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin(process.env.SAUCEDEMO_USR_STANDAR, process.env.SAUCEDEMO_PASSWORD);
 
 
   // Expect a title "to contain" a substring.
@@ -138,7 +140,7 @@ test('realizar compra completa @happyPath @sauceDemo', async ({ page }) => {
   const inventoryPageSteps: InventoryPageSteps = new InventoryPageSteps(page);
   
   //login
-  await new LoginPageSteps(page).realizarLogin("standard_user", "secret_sauce");
+  await new LoginPageSteps(page).realizarLogin(process.env.SAUCEDEMO_USR_STANDAR, process.env.SAUCEDEMO_PASSWORD);
 
 
   // Expect a title "to contain" a substring.
