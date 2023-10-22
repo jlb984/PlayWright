@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {    
+    "prueba": "npx playwright test ejemplos_basicos.spec.ts",
+    "saucedemo": "npx playwright test saucedemo.spec.ts",
+    "login": "npx playwright test --grep 'login'"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
