@@ -6,14 +6,17 @@
   "scripts": {
     "prueba": "npx playwright test ejemplos_basicos.spec.ts",
     "saucedemo": "npx playwright test saucedemo.spec.ts",
-    "login": "npx playwright test --grep 'login'"
+    "login": "npx playwright test --grep 'login'",
+    "allure": "npx allure generate allure-results --clean && npx allure open"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.39.0",
-    "@types/node": "^20.8.2"
+    "@types/node": "^20.8.2",
+    "allure-commandline": "^2.24.1",
+    "allure-playwright": "^2.9.2"
   },
   "dependencies": {
     "dotenv": "^16.3.1"

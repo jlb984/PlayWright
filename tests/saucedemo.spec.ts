@@ -42,7 +42,7 @@ test('obtener un producto aleatorio @inventory @sauceDemo', async ({ page }) => 
   }
 
   const expectedName = await randomItem.locator('.inventory_item_name').innerText();
-  const expectedDescription = await randomItem.locator('.inventory_item_desc').innerText();
+  const expectedDescription = await randomItem.locator('.inventory_item_desc1').innerText();
   const expectedPrice = await randomItem.locator('.inventory_item_price').innerText();
 
   console.log(`Precio: ${expectedPrice} Nombre: ${expectedName} Descripcion: ${expectedDescription}`);

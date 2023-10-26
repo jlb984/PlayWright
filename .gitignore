@@ -4,3 +4,5 @@ node_modules/
 /playwright/.cache/
 /playwright/.env
 .env
+README.md
+allure-report/*
